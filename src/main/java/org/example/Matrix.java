@@ -31,6 +31,10 @@ public class Matrix implements IMatrix {
         return matrix;
     }
 
+    public boolean getFlag(){
+        return flag;
+    }
+
     @Override
     public double getElemByInd(int indStr, int indSto) {
         return matrix[indStr * dimension + indSto];
@@ -61,32 +65,37 @@ public class Matrix implements IMatrix {
 
     @Override
     public double getDet() {
-        double det = 1;
-        for(int k = 0; k < dimension-1; k++){
-            for(int i = k+1; i < dimension; i++){
-                if(getElemByInd(k, i) != 0){
-                    stringSum(k, i);
+        if(flag){
+            return determinate;
+        }
+        else {
+            double det = 1;
+            for (int k = 0; k < dimension - 1; k++) {
+                for (int i = k + 1; i < dimension; i++) {
+                    if (getElemByInd(k, i) != 0) {
+                        stringSum(k, i);
+                    }
+                }
+                if (getElemByInd(k, k) == 0) {
+
+                    for (int i = k; i < dimension; i++) {
+                        if (getElemByInd(i, k) != 0) {
+                            stringSwap(i, k);
+                        }
+                    }
                 }
             }
-            if(getElemByInd(k , k) == 0){
-
-                for(int i = k ; i < dimension; i++){
-                    if(getElemByInd(i, k) != 0){
-                        stringSwap(i, k);
-                    }
-               }
+            System.out.println("Not hehe \n");
+            for (int i = 0; i < 9; i++) {
+                System.out.println(matrix[i]);
             }
+            for (int i = 0; i < dimension; i++) {
+                det *= getElemByInd(i, i);
+            }
+            flag = true;
+            determinate = det;
+            return det;
         }
-        System.out.println("Not hehe \n");
-        for(int i = 0; i < 9; i++){
-            System.out.println(matrix[i]);
-        }
-        for(int i = 0; i < dimension; i++){
-            det *= getElemByInd(i, i);
-        }
-        flag = true;
-        determinate = det;
-        return det;
     }
 
     @Override
