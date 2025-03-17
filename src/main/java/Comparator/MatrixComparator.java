@@ -1,7 +1,6 @@
 package Comparator;
 
 import Interfaces.IMatrix;
-import org.example.Matrix;
 
 import java.util.Comparator;
 

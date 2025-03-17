@@ -21,6 +21,12 @@ public class UpTriangleMatrix extends Matrix implements IMatrix {
             super.setElemByInd(indStr, indSto, val);
         }
     }
-
-
+    @Override
+    public double getDet(){
+        double det = 1;
+        for(int i = 0; i < getDimension(); i++){
+            det*= getElemByInd(i, i);
+        }
+        return det;
+    }
 }
